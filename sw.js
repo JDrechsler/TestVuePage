@@ -9,7 +9,7 @@ const staticVendorFiles = [
 	'https://unpkg.com/quasar-extras@1.0.3/material-icons/material-icons.css',
 	'https://unpkg.com/quasar-framework@%5E0.15.1/dist/umd/quasar.mat.min.css',
 	'https://unpkg.com/vue@2.5.16/dist/vue.js',
-	'https://unpkg.com/http-vue-loader@1.3.4/src/httpVueLoader.js',
+	'/myHttpVueLoader.js',
 	'https://unpkg.com/quasar-framework@%5E0.15.1/dist/umd/quasar.mat.umd.min.js',
 	'https://unpkg.com/firebase@4.8.1/firebase.js',
 	'https://unpkg.com/firebase@4.6.2/firebase-firestore.js',

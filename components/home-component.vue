@@ -50,30 +50,22 @@ var config = {
 };
 
 firebase.initializeApp(config);
-
-module.exports = {
+export default {
 	components: {
 		"card-comp": httpVueLoader("components/card-component.vue")
-	},
-	firestore() {
-		return {
-			billers: firebase
-				.firestore()
-				.collection("billers")
-				.orderBy("dayOfMonth", "asc")
-		};
 	},
 	data() {
 		return {
 			message: "Vuefire & Firestore",
-			notificationSupported: false
+			notificationSupported: false,
+			billers: []
 		};
 	},
 	created() {
 		this.enableNotifications()
+		// this.notifyWithUpcomingBills()
 	},
 	methods: {
-
 		enableNotifications() {
 			if ("Notification" in window) {
 
@@ -98,19 +90,6 @@ module.exports = {
 									// image: 'http://www.leveragedloan.com/wp-content/uploads/2018/01/netflix-logo.png'
 								});
 							});
-
-							// alert('notificiation permission granted')
-							// navigator.serviceWorker.ready.then(function (registration) {
-							// 	registration.showNotification('Netflix is coming up', {
-							// 		body: '$1475',
-							// 		icon: 'http://icons.iconarchive.com/icons/dapino/money/256/Purse-icon.png',
-							// 		vibrate: [200, 100, 200, 100, 200, 100, 200],
-							// 		badge: 'http://icons.iconarchive.com/icons/dapino/money/256/Purse-icon.png'
-							// 		// image: 'http://www.leveragedloan.com/wp-content/uploads/2018/01/netflix-logo.png'
-							// 	});
-							// });
-
-
 						}
 					})
 
@@ -119,6 +98,7 @@ module.exports = {
 				console.log('This browser does not support notifications :/')
 			}
 		},
+
 		addBiller() {
 
 			console.log("adding test biller");
@@ -135,24 +115,32 @@ module.exports = {
 		},
 		presentAddModal() { },
 		presentMoneyOverviewModal() { }
+	},
+	firestore() {
+		return {
+			billers: firebase
+				.firestore()
+				.collection("billers")
+				.orderBy("dayOfMonth", "asc")
+		};
 	}
 };
 </script>
 
-<style lang='css'>
+<style>
 .scroll-content {
-	left: 0;
-	right: 0;
-	top: 0;
-	bottom: 0;
-	position: absolute;
-	z-index: 1;
-	display: block;
-	overflow-x: hidden;
-	overflow-y: scroll;
-	-webkit-overflow-scrolling: touch;
-	will-change: scroll-position;
-	contain: size style layout;
-	background: linear-gradient(45deg, #6cfd9f, #6887ff);
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  z-index: 1;
+  display: block;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  will-change: scroll-position;
+  contain: size style layout;
+  background: linear-gradient(45deg, #6cfd9f, #6887ff);
 }
 </style>
